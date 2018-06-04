@@ -20,7 +20,6 @@ class P2pServer {
 
     connectToPeers() {
         peers.forEach(peer => {
-
             const socket = new Websocket(peer)
 
             socket.on('open', () => this.connectSocket(socket))
@@ -30,6 +29,17 @@ class P2pServer {
     connectSocket(socket) {
         this.socket.push(socket)
         console.log('socket connected')
+
+        this.messageHandler(socket)
+
+        socket.send(JSON.stringify(this.blockchain.chain))
+    }
+
+    messageHandler(socket) {
+        socket.on('message', message => {
+            const data = JSON.parse(message)
+            console.log('data', data)
+        })
     }
 }
 
