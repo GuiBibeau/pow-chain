@@ -37,13 +37,13 @@ class Block {
         return new this(timestamp, lastHash, hash, data, nonce)
     }
 
-    static hash(timestamp, lastHast, data, nonce) {
-        return SHA256(`${timestamp}${lastHast}${data}${nonce}`).toString()
+    static hash(timestamp, lastHash, data, nonce) {
+        return SHA256(`${timestamp}${lastHash}${data}${nonce}`).toString();
     }
 
     static blockHash(block) {
-        const {timestamp, lastHash, data, nonce} = block
-        return Block.hash(timestamp, lastHash, data)
+        const { timestamp, lastHash, data, nonce } = block;
+        return Block.hash(timestamp, lastHash, data, nonce);
     }
 }
 
